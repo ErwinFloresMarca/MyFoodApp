@@ -13,7 +13,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.myfoodapp.seminarioproyect.myfoodapp.utils.Data;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -46,8 +45,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginClient(){
-        TextView email=findViewById(R.id.email);
-        TextView password= findViewById(R.id.password);
+        TextView email=findViewById(R.id.emailCl);
+        TextView password= findViewById(R.id.passwordCl);
         AsyncHttpClient client= new AsyncHttpClient();
         RequestParams params=new RequestParams();
         params.add("email",email.getText().toString());
