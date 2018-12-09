@@ -7,6 +7,8 @@ public class Data {
     public static String REGISTER_CLIENT="/clients/";
     //
     public static String REGISTER_RESTAURANT = "/restaurants/";
+    public static String UPLOAD_RESTAURANT = "/restaurants/uploadrestaurant";
+
 
 }
 

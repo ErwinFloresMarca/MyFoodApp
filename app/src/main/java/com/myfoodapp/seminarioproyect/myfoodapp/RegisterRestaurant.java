@@ -160,3 +160,6 @@ public class RegisterRestaurant extends AppCompatActivity implements OnMapReadyC
         return result;
     }
 }
+
+//falta recuperar el id de restaurant en alguna variable y llevra ese id a la peticion
+//que estamos haciendo

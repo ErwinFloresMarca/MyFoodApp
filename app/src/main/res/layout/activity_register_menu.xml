@@ -19,7 +19,7 @@
             android:layout_width="169dp"
             android:layout_height="43dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="28dp"
             android:ems="10"
             android:hint="Nombre Menu"
             android:inputType="textPersonName"
@@ -29,9 +29,9 @@
         <EditText
             android:id="@+id/priceMe"
             android:layout_width="169dp"
-            android:layout_height="38dp"
+            android:layout_height="43dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:ems="10"
             android:hint="Precio"
             android:inputType="textPersonName"
@@ -42,7 +42,7 @@
             android:id="@+id/btn_RegisterMe"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="52dp"
             android:layout_marginTop="20dp"
             android:text="Registrar"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +50,8 @@
 
         <ImageView
             android:id="@+id/imgMe"
-            android:layout_width="181dp"
-            android:layout_height="108dp"
+            android:layout_width="180dp"
+            android:layout_height="123dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -61,17 +61,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_menu_camera" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_imgMe"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="76dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:text="Tomar Foto"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.941"
+            app:layout_constraintHorizontal_bias="0.621"
             app:layout_constraintStart_toEndOf="@+id/btn_RegisterMe"
-            app:layout_constraintTop_toBottomOf="@+id/imgMe"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:layout_constraintTop_toBottomOf="@+id/imgMe" />
 
 
     </android.support.constraint.ConstraintLayout>

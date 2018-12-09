@@ -28,7 +28,11 @@
         <activity android:name=".Login" />
         <!-- android:screenOrientation="portrait" -->
         <activity android:name=".RegisterRestaurant">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".RegisterClient" >
 
@@ -52,11 +56,7 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".CameraPhoto" />
         <activity android:name=".RegisterMenu">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
