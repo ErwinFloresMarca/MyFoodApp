@@ -9,6 +9,11 @@ public class Data {
     public static String REGISTER_RESTAURANT = "/restaurants/";
     public static String UPLOAD_RESTAURANT = "/restaurants/uploadrestaurant";
 
+    public static String REGISTER_MENU="/menus/";
+    //
+    public static String ID_CLIENT=null;
+    public static String ID_RESTAURANT=null;
+    //
 
 }
 
