@@ -34,6 +34,8 @@ import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.myfoodapp.seminarioproyect.myfoodapp.utils.Data.ID_CLIENT;
+
 public class RegisterRestaurant extends AppCompatActivity implements OnMapReadyCallback {
     private MapView map;
     private GoogleMap mMap;
@@ -67,7 +69,6 @@ public class RegisterRestaurant extends AppCompatActivity implements OnMapReadyC
     public void sendDataRest () {
         TextView name = findViewById(R.id.nameRe);
         TextView nit = findViewById(R.id.nitRe);
-        TextView owner = findViewById(R.id.ownerRe);
         TextView phone = findViewById(R.id.phoneRe);
         TextView street = findViewById(R.id.streetRe);
 
@@ -76,13 +77,13 @@ public class RegisterRestaurant extends AppCompatActivity implements OnMapReadyC
         RequestParams params = new RequestParams();
         params.add("name", name.getText().toString());
         params.add("nit", nit.getText().toString());
-        params.add("owner", owner.getText().toString());
+        params.add("owner", ID_CLIENT);
         params.add("phone", phone.getText().toString());
         params.add("street", street.getText().toString());
         params.add("lat", String.valueOf(mainposition.latitude));
         params.add("log", String.valueOf(mainposition.longitude));
 
-        client.post(Data.REGISTER_RESTAURANT, params, new JsonHttpResponseHandler(){
+        client.post(Data.HOST+Data.REGISTER_RESTAURANT, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                  /*AlertDialog alertDialog = new AlertDialog.Builder(RegisterRestaurant.this).create();
@@ -101,7 +102,11 @@ public class RegisterRestaurant extends AppCompatActivity implements OnMapReadyC
                  }catch (JSONException e){
                      e.printStackTrace();
                  }*/
-
+                 try {
+                     Data.ID_RESTAURANT = response.getString("id");
+                 }catch (JSONException e){
+                     e.printStackTrace();
+                 }
                 Intent camera = new Intent(RegisterRestaurant.this, CameraPhoto.class);
                 RegisterRestaurant.this.startActivity(camera);
             }

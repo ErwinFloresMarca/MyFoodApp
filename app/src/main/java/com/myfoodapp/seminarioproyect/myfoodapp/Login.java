@@ -1,6 +1,7 @@
 package com.myfoodapp.seminarioproyect.myfoodapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +40,8 @@ public class Login extends AppCompatActivity {
         registerNewClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent rclient=new Intent(getApplicationContext(),RegisterClient.class);
+                startActivity(rclient);
             }
         });
     }
@@ -57,7 +59,7 @@ public class Login extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
                 try{
-                    String token="";response.getString("token");
+                    String token=response.getString("token");
                     alertDialog.setTitle("RESPONSE SERVER");
                     alertDialog.setMessage("Sesion Iniciada");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK",new DialogInterface.OnClickListener(){
@@ -68,13 +70,13 @@ public class Login extends AppCompatActivity {
                         }
                     });
                     alertDialog.show();
-                    Data.TOKEN=token;
+                    Data.TOKEN="data "+token;
                 }catch(Exception e){
                     e.printStackTrace();
                 }
 
             }
         });
-        email.setText(Data.TOKEN);
+        //email.setText(Data.TOKEN);
     }
 }

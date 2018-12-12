@@ -70,12 +70,14 @@ public class CameraPhoto extends AppCompatActivity {
                     RequestParams params = new RequestParams();
                     try {
                         params.put("img", img);
-
-                        client.post(Data.UPLOAD_RESTAURANT, params, new JsonHttpResponseHandler(){
+                        //params.add("id",Data.ID_RESTAURANT);
+                        client.post(Data.HOST+Data.UPLOAD_RESTAURANT+"?id="+Data.ID_RESTAURANT, params, new JsonHttpResponseHandler(){
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 Toast.makeText(CameraPhoto.this, "EXITO", Toast.LENGTH_LONG).show();
                                 //super.onSuccess(statusCode, headers, response);
+                                Intent rmenu =new Intent(getApplicationContext(),RegisterMenu.class);
+                                startActivity(rmenu);
                             }
                         });
 
