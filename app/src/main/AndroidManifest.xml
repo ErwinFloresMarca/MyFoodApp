@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!--
+    permisos android para camara
+    <uses-permission android:name="android:authorities=com.myfoodapp.seminarioproyect.myfoodapp"/>
+    -->
+
+
+    <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
@@ -27,13 +33,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Login" />
         <!-- android:screenOrientation="portrait" -->
-        <activity android:name=".RegisterRestaurant">
-
-        </activity>
-        <activity android:name=".RegisterClient" >
-
-        </activity>
-
+        <activity android:name=".RegisterRestaurant"></activity>
+        <activity android:name=".RegisterClient"></activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -50,9 +51,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".CameraPhoto" >
-
-        </activity>
+        <activity android:name=".CameraPhoto"></activity>
         <activity android:name=".RegisterMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,6 +59,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ListarRestaurant"></activity>
     </application>
 
 </manifest>

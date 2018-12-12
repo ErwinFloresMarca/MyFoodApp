@@ -219,8 +219,10 @@ public class RegisterMenu extends AppCompatActivity implements View.OnClickListe
         File file = fileAndPath.getFile();
         path = fileAndPath.getPath();
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Uri fileuri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+            //permiso para mi aplicacion
+            //Uri fileuri = FileProvider.getUriForFile(getApplicationContext(), "com.myfoodapp.seminarioproyect.myfoodapp", file);
             camera.putExtra(MediaStore.EXTRA_OUTPUT, fileuri);
         } else {
             camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
