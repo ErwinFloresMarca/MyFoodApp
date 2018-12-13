@@ -1,12 +1,15 @@
 package com.myfoodapp.seminarioproyect.myfoodapp;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +28,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.myfoodapp.seminarioproyect.myfoodapp.adapters.MenuAdapter;
 import com.myfoodapp.seminarioproyect.myfoodapp.items.ItemMenu;
+import com.myfoodapp.seminarioproyect.myfoodapp.utils.Data;
 import com.myfoodapp.seminarioproyect.myfoodapp.utils.Methods;
 
 import org.json.JSONArray;
@@ -50,6 +54,7 @@ public class RegisterMenu extends AppCompatActivity implements View.OnClickListe
     ImageView imgMenu;
     Button btn_imgMenu;
     ArrayList<ItemMenu> listData;
+    int CODE_PERMISSIONS=101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +70,10 @@ public class RegisterMenu extends AppCompatActivity implements View.OnClickListe
         imgMenu=findViewById(R.id.imgMe);
         btn_registerMe.setOnClickListener(this);
         btn_imgMenu.setOnClickListener(this);
-
+        btn_imgMenu.setVisibility(View.INVISIBLE);
+        if(reviewPermissions()){
+            btn_imgMenu.setVisibility(View.VISIBLE);
+        }
         listData = new ArrayList<>();
         recyclerMenu=findViewById(R.id.reciclerMe);
         recyclerMenu.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -132,24 +140,37 @@ public class RegisterMenu extends AppCompatActivity implements View.OnClickListe
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
 
-        File file = new File(path);
-        try {
-            params.put("picture", file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        params.put("restaurant",ID_RESTAURANT);//idRestaurant
-        params.put("nombre", nameMenu.getText());
-        params.put("precio", priceMenu.getText());
+        params.add("restaurant",ID_RESTAURANT);//idRestaurant
+        params.add("nombre", nameMenu.getText().toString());
+        params.add("precio", priceMenu.getText().toString());
 
         client.post(HOST+REGISTER_MENU,params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    String message = response.getString("message");
-                    //String id = response.getString("_id");
-
-                    if (message != null) {
+                    String id = response.getString("id");
+                    String message=response.getString("msn");
+                    if (id != null) {
+                        AsyncHttpClient imageUp = new AsyncHttpClient();
+                        RequestParams paramsImg = new RequestParams();
+                        File file = new File(path);
+                        try {
+                            paramsImg.put("picture", file);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        imageUp.post(Data.HOST+Data.UP_IMAGE_MENU+"?id="+id,paramsImg,new JsonHttpResponseHandler(){
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                                try{
+                                    if(response.getString("msn").equals("OK")){
+                                        Toast.makeText(RegisterMenu.this, "SUCCES", Toast.LENGTH_LONG).show();
+                                    }
+                                }catch(JSONException e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                         Toast.makeText(RegisterMenu.this, message, Toast.LENGTH_SHORT).show();
                         path = "";
                         nameMenu.getText().clear();
@@ -246,6 +267,32 @@ public class RegisterMenu extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+    private boolean reviewPermissions() {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            return true;
+        }
+
+        if(this.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        requestPermissions(new String [] {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_PERMISSIONS);
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (CODE_PERMISSIONS == requestCode) {
+            if (permissions.length == 3) {
+                btn_imgMenu.setVisibility(View.VISIBLE);
+
+            }
+
+        }
+    }
+
 
     private void loadImageCamera() {
         Bitmap img = BitmapFactory.decodeFile(path);
