@@ -44,6 +44,7 @@
             android:layout_height="44dp"
             android:layout_marginStart="52dp"
             android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"
             android:text="Registrar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/priceMe" />
@@ -59,7 +60,7 @@
             app:layout_constraintHorizontal_bias="0.685"
             app:layout_constraintStart_toEndOf="@+id/nameMe"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu_camera" />
+            app:srcCompat="@drawable/logogrande" />
 
         <Button
             android:id="@+id/btn_imgMe"
@@ -68,6 +69,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimaryDark"
             android:text="Tomar Foto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.621"
