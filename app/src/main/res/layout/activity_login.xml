@@ -38,16 +38,20 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="141dp"
         android:background="@color/colorPrimaryDark"
         android:text="Iniciar Sesion"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="357dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordCl" />
 
     <Button
         android:id="@+id/btn_registerNewClient"
-        android:layout_width="wrap_content"
+        android:layout_width="103dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

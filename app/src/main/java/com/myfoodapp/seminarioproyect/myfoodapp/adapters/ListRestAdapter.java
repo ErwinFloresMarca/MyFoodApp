@@ -43,7 +43,7 @@ public class ListRestAdapter extends BaseAdapter {
 
         }
 
-        TextView nameListRes = (TextView)convertView.findViewById(R.id.);
+        TextView nameListRest = (TextView)convertView.findViewById(R.id.namelistRest);
         return convertView;
     }
 }
